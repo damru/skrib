@@ -1,4 +1,4 @@
-CREATE TABLE messages(
+CREATE TABLE message(
   id IDENTITY PRIMARY KEY,
   body VARCHAR (200),
   latitude DOUBLE,
@@ -6,10 +6,10 @@ CREATE TABLE messages(
   altitude DOUBLE ,
   rayon INT ,
   date DATE,
-  author_id DOUBLE
+  author_id BIGINT
 );
 
-CREATE TABLE users(
+CREATE TABLE user(
   id IDENTITY PRIMARY KEY,
   lastname varchar(62),
   firstname varchar(62),
@@ -24,6 +24,6 @@ CREATE TABLE users(
   altitude DOUBLE
 );
 
-ALTER TABLE messages
+ALTER TABLE message
 ADD FOREIGN KEY (author_id)
-REFERENCES users(id) ;
+REFERENCES user(id) ;
