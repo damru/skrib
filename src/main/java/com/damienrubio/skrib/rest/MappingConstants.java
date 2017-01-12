@@ -9,4 +9,7 @@ public class MappingConstants {
     // MESSAGE
     public static final String MESSAGE = "/message";
 
+    // USER
+    public static final String USER = "/user";
+
 }

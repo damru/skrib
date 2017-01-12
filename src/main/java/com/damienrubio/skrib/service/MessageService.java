@@ -38,11 +38,10 @@ public class MessageService {
     }
 
     public boolean isReachable(Message message, User user) {
-        Long distanceBetweenPositionAndMessage =
-            positionService.distanceBetweenPositionAndMessage(user.getPosition(), message.getPosition());
+        double distanceBetweenUserAndMessage = positionService.distanceBetweenUserAndMessage(user, message);
+        message.setDistance(distanceBetweenUserAndMessage);
 
-        if (distanceBetweenPositionAndMessage > message.getRayon() || distanceBetweenPositionAndMessage > user.getRayon()
-            || message.getRayon() < user.getRayon()) {
+        if (distanceBetweenUserAndMessage > message.getRayon() || distanceBetweenUserAndMessage > user.getSettings().getRayon()) {
             return false;
         }
 

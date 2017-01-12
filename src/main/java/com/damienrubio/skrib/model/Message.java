@@ -19,8 +19,8 @@ public class Message implements Serializable {
 
     private String body;
 
-    @JsonManagedReference("message-listeMessages")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference("message-author")
+    @ManyToOne
     @JoinColumn(name="author_id")
     private User author;
 
@@ -32,5 +32,8 @@ public class Message implements Serializable {
     private Long rayon;
 
     private Date date;
+
+    @Transient
+    private double distance;
 
 }

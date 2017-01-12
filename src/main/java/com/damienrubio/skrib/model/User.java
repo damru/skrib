@@ -1,6 +1,9 @@
 package com.damienrubio.skrib.model;
 
+import com.damienrubio.skrib.enums.DistanceUnit;
 import com.damienrubio.skrib.enums.Gender;
+import com.damienrubio.skrib.enums.converter.DistanceUnitConverter;
+import com.damienrubio.skrib.enums.converter.GenderConverter;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
@@ -31,12 +34,10 @@ public class User implements Serializable {
 
     private int age;
 
-    @Enumerated(EnumType.STRING)
+    @Convert( converter=GenderConverter.class )
     private Gender gender;
 
-    private Long rayon;
-
-    @JsonBackReference("message-listeMessages")
+    @JsonBackReference("message-author")
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     private List<Message> listeMessages;
 
@@ -44,5 +45,8 @@ public class User implements Serializable {
     private Collection<Position> lieuxFavoris;
 
     private Position position;
+
+    @OneToOne(mappedBy = "user")
+    private UserSettings settings;
 
 }
