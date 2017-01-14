@@ -20,15 +20,36 @@ public class MessageController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/{id}")
-    public Message viewMessage(@PathVariable(name = "id") Long idMessage, @RequestBody User user) {
-        return messageService.readMessage(idMessage, user);
-    }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public Message viewMessage(@PathVariable(name = "id") Long idMessage, @RequestHeader User user) {
+//        return messageService.readMessage(idMessage, user);
+//    }
 
-    @RequestMapping(value = "/{id}")
+//    @RequestMapping(value = "/create", method = RequestMethod.POST)
+//    public Message createMessage(@RequestBody Message message, @RequestHeader User user) {
+//        message.setAuthor(user);
+//        message.setPosition(user.getPosition());
+//        messageService.save(message);
+//        return message;
+//    }
+
+    /**
+     * TEST PURPOSE
+     */
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Message viewMessage(@PathVariable(name = "id") Long idMessage) {
         User user = userService.find(1L);
         return messageService.readMessage(idMessage, user);
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public Message createMessage(@RequestBody Message message) {
+        User user = userService.find(1L);
+        message.setAuthor(user);
+        message.setPosition(user.getPosition());
+        messageService.save(message);
+        return message;
     }
 
 }
