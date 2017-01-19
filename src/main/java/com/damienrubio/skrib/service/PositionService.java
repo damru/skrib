@@ -3,6 +3,7 @@ package com.damienrubio.skrib.service;
 import com.damienrubio.skrib.enums.DistanceUnit;
 import com.damienrubio.skrib.model.Message;
 import com.damienrubio.skrib.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PositionService {
 
+    @Autowired
+    private UserService userService;
+
     /**
      *
      * @param user
@@ -18,6 +22,9 @@ public class PositionService {
      * @return
      */
     public double distanceBetweenUserAndMessage(User user, Message message) {
+        if (user.getSettings() == null) {
+            user.setSettings(userService.getUserSettings(user));
+        }
         return this.distance(user.getPosition().getLatitude(), message.getPosition().getLatitude(), user.getPosition().getLongitude(), message.getPosition().getLongitude(),
             user.getPosition().getAltitude(), message.getPosition().getAltitude(), user.getSettings().getDistanceUnit());
     }

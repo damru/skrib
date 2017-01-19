@@ -6,10 +6,7 @@ CREATE TABLE user(
   username VARCHAR(16),
   email VARCHAR(62),
   age INT,
-  gender VARCHAR (3),
-  latitude DOUBLE,
-  longitude DOUBLE ,
-  altitude DOUBLE,
+  gender VARCHAR (3)
 );
 
 CREATE TABLE message(

@@ -1,8 +1,8 @@
 INSERT INTO user
-  (lastname ,firstname ,username ,email ,age ,gender ,latitude ,longitude, altitude)
+  (lastname ,firstname ,username ,email ,age ,gender)
 VALUES
-  ('Rubio', 'Damien', 'DRU', 'damien@skrib.me', 30, 'M', 48.807669, 2.363885 , 50)
-  , ('Bohy', 'Fanny', 'FBO', 'damien@skrib.me', 30, 'F', 48.807669, 2.363885 , 50);
+  ('Rubio', 'Damien', 'DRU', 'damien@skrib.me', 30, 'M')
+  , ('Bohy', 'Fanny', 'FBO', 'damien@skrib.me', 30, 'F');
 
 INSERT INTO user_settings
 (rayon ,distance_unit, user_id)

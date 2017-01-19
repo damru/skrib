@@ -1,11 +1,10 @@
 package com.damienrubio.skrib.model;
 
-import com.damienrubio.skrib.enums.DistanceUnit;
 import com.damienrubio.skrib.enums.Gender;
-import com.damienrubio.skrib.enums.converter.DistanceUnitConverter;
 import com.damienrubio.skrib.enums.converter.GenderConverter;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,7 +12,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "id")
 @Data
 @Entity
 @Table(name = "user")
@@ -27,6 +26,9 @@ public class User implements Serializable {
 
     private String firstname;
 
+    /**
+     * FIXME: maybe password will never be deserialized from RequestBody ?
+     */
     @JsonIgnore
     private String password;
 
@@ -39,17 +41,21 @@ public class User implements Serializable {
     @Convert( converter=GenderConverter.class )
     private Gender gender;
 
-    @JsonBackReference("message-author")
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     private List<Message> listeMessages;
 
     @Transient
     private Collection<Position> lieuxFavoris;
 
+    /**
+     * We do not save the user's position.
+     * It should be send everytime by the frontend application.
+     */
+    @Transient
     private Position position;
 
     /**
-     * UserSettings are transient because we want to load them only when explicitly needed
+     * We want to load settings only when explicitly needed.
      */
 //    @Transient
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
