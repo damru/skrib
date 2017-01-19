@@ -10,7 +10,7 @@ public abstract class AbstractController {
 
     protected HttpHeaders generateHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
-        if (SkribApplication.contexte.hasError())
+        if (SkribApplication.contexte.hasErrors())
             headers.add("errors", SkribApplication.contexte.getErrors().toString());
         if (SkribApplication.contexte.hasWarnings())
             headers.add("warnings", SkribApplication.contexte.getWarnings().toString());

@@ -31,6 +31,7 @@ public class SkribContext extends ThreadLocal {
 
     /**
      * Check if there is message with specified criticity.
+     *
      * @param criticity
      * @return
      */
@@ -44,14 +45,7 @@ public class SkribContext extends ThreadLocal {
 
     /**
      * Check if there is a message with ERROR criticty in the current context.
-     * @return
-     */
-    public boolean hasError() {
-        return hasCriticity(Criticity.ERROR);
-    }
-
-    /**
-     * Check if there is a message with ERROR criticty in the current context.
+     *
      * @return
      */
     public boolean hasErrors() {
@@ -60,6 +54,7 @@ public class SkribContext extends ThreadLocal {
 
     /**
      * Check if there is a message with WARNING criticty in the current context.
+     *
      * @return
      */
     public boolean hasWarnings() {
@@ -68,6 +63,7 @@ public class SkribContext extends ThreadLocal {
 
     /**
      * Check if there is a message with INFO criticty in the current context.
+     *
      * @return
      */
     public boolean hasInfos() {
@@ -76,6 +72,7 @@ public class SkribContext extends ThreadLocal {
 
     /**
      * Get all messages with specified criticity.
+     *
      * @param criticity
      * @return
      */
