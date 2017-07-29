@@ -1,0 +1,30 @@
+#############################
+# Environment configuration
+#############################
+
+#############################
+# Application configuration
+#############################
+spring:
+  profiles:
+    include: swagger
+  datasource:
+    # use h2 can have a buid in web console http://localhost:8080/h2-console
+    platform: h2
+    url: jdbc:h2:mem:skrib;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    schema: classpath*:db/${spring.datasource.platform}/schema.sql
+    data: classpath*:db/${spring.datasource.platform}/data.sql
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+logging:
+  level:
+    root: INFO
+    com.damienrubio.com: DEBUG
+
+#############################
+# Application variables
+#############################

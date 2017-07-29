@@ -1,22 +1,34 @@
 package com.damienrubio.skrib.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 
-//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "message")
-public class Message implements Serializable {
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "idMessage")
+public class Message extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue
-    private Long id;
+    private Long idMessage;
 
     private String body;
 
@@ -24,15 +36,6 @@ public class Message implements Serializable {
 
     private Long rayon;
 
-    private Date date;
-
-    @Transient
-    private ArrayList<Tag> tags;
-
-    /**
-     * FIXME - Only Author id and username should be displayed
-     */
-    @JsonManagedReference("message-author")
     @ManyToOne
     @JoinColumn(name="author_id")
     private User author;

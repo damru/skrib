@@ -1,6 +1,7 @@
 package com.damienrubio.skrib.service;
 
-import com.damienrubio.skrib.model.Message;
+import com.damienrubio.skrib.exception.UserNotFoundException;
+import com.damienrubio.skrib.exception.UserSettingsNotFoundException;
 import com.damienrubio.skrib.model.User;
 import com.damienrubio.skrib.model.UserSettings;
 import com.damienrubio.skrib.repository.UserRepository;
@@ -20,27 +21,39 @@ public class UserService {
     @Autowired
     private UserSettingsRepository userSettingsRepository;
 
-    public boolean isAuthor(User user, Message message) {
-        if (user != null && message != null && message.getAuthor() != null) {
-            if (user.equals(message.getAuthor())) {
-                return true;
-            }
-        }
-
-        return false;
+    public boolean isAuthor(User user, User messageAuthor) {
+        return user != null && messageAuthor != null && user.equals(messageAuthor);
     }
 
-    public User find(Long idUser) {
+    /**
+     * Get a user.
+     *
+     * @param idUser
+     * @return user
+     */
+    public User getUser(Long idUser) {
         User user = userRepository.findOne(idUser);
-//        user.setSettings(getUserSettings(user));
+        if (user == null) {
+            throw UserNotFoundException.builder().id(idUser).build();
+        }
         return user;
     }
 
     public UserSettings getUserSettings(User user) {
-        return userSettingsRepository.findByUserId(user.getId());
+        UserSettings userSettings = userSettingsRepository.findByUser(user);
+        if (userSettings == null) {
+            throw UserSettingsNotFoundException.builder().id(user.getIdUser()).build();
+        }
+        return userSettings;
     }
 
-    public void save(User user) {
-        userRepository.save(user);
+    /**
+     * Save user in database.
+     *
+     * @param user
+     * @return new user
+     */
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 }

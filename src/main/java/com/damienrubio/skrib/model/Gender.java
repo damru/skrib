@@ -1,4 +1,4 @@
-package com.damienrubio.skrib.enums;
+package com.damienrubio.skrib.model;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 

@@ -1,33 +1,43 @@
 package com.damienrubio.skrib.model;
 
-import com.damienrubio.skrib.enums.DistanceUnit;
-import com.damienrubio.skrib.enums.Gender;
-import com.damienrubio.skrib.enums.converter.DistanceUnitConverter;
-import com.damienrubio.skrib.enums.converter.GenderConverter;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.damienrubio.skrib.model.converter.GenderConverter;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
-//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "user")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="idUser")
 public class User implements Serializable {
 
     @Id
     @GeneratedValue
-    private long id;
+    private long idUser;
 
     private String lastname;
 
     private String firstname;
 
-    @JsonIgnore
+    /**
+     * FIXME: maybe password will never be deserialized from RequestBody ?
+     */
     private String password;
 
     private String username;
@@ -39,19 +49,11 @@ public class User implements Serializable {
     @Convert( converter=GenderConverter.class )
     private Gender gender;
 
-    @JsonBackReference("message-author")
+    @JsonIgnore
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     private List<Message> listeMessages;
 
-    @Transient
-    private Collection<Position> lieuxFavoris;
-
-    private Position position;
-
-    /**
-     * UserSettings are transient because we want to load them only when explicitly needed
-     */
-//    @Transient
+    @JsonIgnore
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private UserSettings settings;
 

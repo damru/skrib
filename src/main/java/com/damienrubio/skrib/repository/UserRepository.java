@@ -1,5 +1,6 @@
 package com.damienrubio.skrib.repository;
 
+
 import com.damienrubio.skrib.model.User;
 import org.springframework.data.repository.CrudRepository;
 

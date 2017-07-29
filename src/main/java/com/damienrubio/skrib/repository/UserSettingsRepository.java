@@ -1,5 +1,7 @@
 package com.damienrubio.skrib.repository;
 
+
+import com.damienrubio.skrib.model.User;
 import com.damienrubio.skrib.model.UserSettings;
 import org.springframework.data.repository.CrudRepository;
 
@@ -8,6 +10,8 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface UserSettingsRepository extends CrudRepository<UserSettings, Long> {
 
-    UserSettings findByUserId(Long userId);
+    UserSettings findByUser(User user);
+
+    UserSettings findByUser_IdUser(Long idUser);
 
 }

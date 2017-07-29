@@ -1,0 +1,27 @@
+#############################
+# Environment configuration
+#############################
+server:
+  port: 8081
+  contextPath: /skrib/api
+
+#############################
+# Application configuration
+#############################
+info:
+  build:
+    artifact: @project.artifactId@
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+
+logging:
+  level:
+    root: WARN
+
+#############################
+# Application variables
+#############################
+# salt for JWY
+skrib:
+    sha256: ca9d6466c2768d1ed05add8d8f4fcd35335eaff25eb6fbe1144f56901cc27cee

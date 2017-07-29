@@ -1,6 +1,7 @@
-package com.damienrubio.skrib.enums.converter;
+package com.damienrubio.skrib.model.converter;
 
-import com.damienrubio.skrib.enums.DistanceUnit;
+
+import com.damienrubio.skrib.model.DistanceUnit;
 
 import javax.persistence.AttributeConverter;
 

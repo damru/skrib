@@ -1,0 +1,21 @@
+#############################
+# Environment configuration
+#############################
+
+#############################
+# Application configuration
+#############################
+swagger:
+  title: @project.name@
+  description: @project.description@
+  version: @project.version@
+  termsOfServiceUrl: "skrib.me/terms"
+  contactName: "Damien R."
+  contactUrl: "skrib.me"
+  contactEmail: "damien@skrib.me"
+  license: "license"
+  licenseUrl: "skrib.me/license"
+
+#############################
+# Application variables
+#############################
