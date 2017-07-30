@@ -1,5 +1,6 @@
-package com.damienrubio.skrib;
+package com.damienrubio.skrib.repository;
 
+import com.damienrubio.skrib.UserFactory;
 import com.damienrubio.skrib.model.DistanceUnit;
 import com.damienrubio.skrib.model.User;
 import com.damienrubio.skrib.model.UserSettings;

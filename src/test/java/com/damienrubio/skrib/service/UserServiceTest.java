@@ -1,5 +1,6 @@
-package com.damienrubio.skrib;
+package com.damienrubio.skrib.service;
 
+import com.damienrubio.skrib.UserFactory;
 import com.damienrubio.skrib.exception.UserNotFoundException;
 import com.damienrubio.skrib.exception.UserSettingsNotFoundException;
 import com.damienrubio.skrib.model.User;

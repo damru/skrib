@@ -1,4 +1,4 @@
-package com.damienrubio.skrib;
+package com.damienrubio.skrib.service;
 
 import com.damienrubio.skrib.model.DistanceUnit;
 import com.damienrubio.skrib.model.Position;

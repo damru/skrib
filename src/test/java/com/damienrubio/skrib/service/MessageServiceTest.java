@@ -1,13 +1,11 @@
-package com.damienrubio.skrib;
+package com.damienrubio.skrib.service;
 
+import com.damienrubio.skrib.MessageFactory;
 import com.damienrubio.skrib.exception.MessageNotFoundException;
 import com.damienrubio.skrib.model.DistanceUnit;
 import com.damienrubio.skrib.model.Message;
 import com.damienrubio.skrib.model.Position;
 import com.damienrubio.skrib.repository.MessageRepository;
-import com.damienrubio.skrib.service.MessageService;
-import com.damienrubio.skrib.service.PositionService;
-import com.damienrubio.skrib.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
