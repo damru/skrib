@@ -1,10 +1,9 @@
 package com.damienrubio.skrib.service;
 
 import com.damienrubio.skrib.exception.MessageNotFoundException;
+import com.damienrubio.skrib.model.DistanceUnit;
 import com.damienrubio.skrib.model.Message;
 import com.damienrubio.skrib.model.Position;
-import com.damienrubio.skrib.model.User;
-import com.damienrubio.skrib.model.UserSettings;
 import com.damienrubio.skrib.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,35 +48,18 @@ public class MessageService {
     }
 
     /**
-     * Clean message's author to display only required information.
-     *
-     * @param m
-     */
-    private void cleanAuthor(Message m) {
-        User author = new User();
-        author.setIdUser(m.getAuthor().getIdUser());
-        author.setUsername(m.getAuthor().getUsername());
-        m.setAuthor(author);
-    }
-
-    /**
      * Check if a message is reachable by the current user.
      *
      * @param message
-     * @param user
+     * @param userPosition
+     * @param distanceMax
+     * @param unit
      * @return
      */
-    public boolean isReachable(Message message, User user, Position userPosition) {
-        UserSettings userSettings = userService.getUserSettings(user);
-        double distanceBetweenUserAndMessage = positionService
-            .distanceBetweenUserAndMessage(userSettings.getDistanceUnit(), userPosition, message.getPosition());
+    public boolean isReachable(Message message, Position userPosition, Long distanceMax, DistanceUnit unit) {
+        double distanceBetweenUserAndMessage = positionService.distanceBetweenUserAndMessage(unit, userPosition, message.getPosition());
         message.setDistance(distanceBetweenUserAndMessage);
-
-        if (distanceBetweenUserAndMessage > message.getRayon() || distanceBetweenUserAndMessage > user.getSettings().getRayon()) {
-            return false;
-        }
-
-        return true;
+        return distanceBetweenUserAndMessage <= message.getRayon() && distanceBetweenUserAndMessage <= distanceMax;
 
     }
 

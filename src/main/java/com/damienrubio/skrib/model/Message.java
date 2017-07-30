@@ -42,6 +42,7 @@ public class Message extends BaseEntity implements Serializable {
 
     /**
      * Distance is transient because we do not persist it as it depends on the user who is reading the message.
+     * It is used for display only, to show how far is the message.
      */
     @Transient
     private double distance;

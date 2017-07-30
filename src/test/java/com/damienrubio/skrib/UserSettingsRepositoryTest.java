@@ -28,7 +28,7 @@ public class UserSettingsRepositoryTest {
 
     @Test
     public void should_return_userSettings_from_user() {
-        User user = UserTestUtils.randomUser();
+        User user = UserFactory.randomUser();
         user.setIdUser(0);
         testEntityManager.persist(user);
         testEntityManager.persist(UserSettings.builder().distanceUnit(DistanceUnit.CENTIMETER).rayon(1L).user(user).build());
@@ -41,7 +41,7 @@ public class UserSettingsRepositoryTest {
 
     @Test
     public void should_return_userSettings_from_userId() {
-        User user = UserTestUtils.randomUser();
+        User user = UserFactory.randomUser();
         user.setIdUser(0);
         testEntityManager.persist(user);
         testEntityManager.persist(UserSettings.builder().distanceUnit(DistanceUnit.CENTIMETER).rayon(1L).user(user).build());

@@ -41,7 +41,7 @@ public class UserServiceTest {
 
     @Test
     public void get_user_should_return_user() {
-        User savedUser = UserTestUtils.randomUser();
+        User savedUser = UserFactory.randomUser();
         when(userRepository.findOne(anyLong())).thenReturn(savedUser);
 
         User user = userService.getUser(1L);
@@ -51,7 +51,7 @@ public class UserServiceTest {
 
     @Test
     public void save_user_should_return_user() {
-        User savedUser = UserTestUtils.randomUser();
+        User savedUser = UserFactory.randomUser();
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
         User user = userService.saveUser(savedUser);
@@ -61,15 +61,15 @@ public class UserServiceTest {
 
     @Test
     public void check_author_should_return_true() {
-        User userAndAuthor = UserTestUtils.randomUser();
+        User userAndAuthor = UserFactory.randomUser();
 
         assertTrue(userService.isAuthor(userAndAuthor, userAndAuthor));
     }
 
     @Test
     public void get_userSettings_should_return_userSettings() {
-        User user = UserTestUtils.randomUser();
-        when(userSettingsRepository.findByUser(any(User.class))).thenReturn(UserTestUtils.randomUserSettings(user));
+        User user = UserFactory.randomUser();
+        when(userSettingsRepository.findByUser(any(User.class))).thenReturn(UserFactory.randomUserSettings(user));
 
         UserSettings userSettings = userService.getUserSettings(user);
         assertTrue(userSettings != null);
@@ -79,7 +79,7 @@ public class UserServiceTest {
     @Test(expected = UserSettingsNotFoundException.class)
     public void get_userSettings_from_unknown_user_should_return_exception() {
         when(userSettingsRepository.findByUser(any(User.class))).thenReturn(null);
-        userService.getUserSettings(UserTestUtils.randomUser());
+        userService.getUserSettings(UserFactory.randomUser());
     }
 
 }
