@@ -8,7 +8,7 @@
     <version>1.0-SNAPSHOT</version>
     <name>Skrib API</name>
     <description>Skrib API | You can now view all the messages around you !</description>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
