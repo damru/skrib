@@ -27,9 +27,6 @@ public class MessageServiceTest {
     private PositionService positionService;
 
     @Mock
-    private UserService userService;
-
-    @Mock
     private MessageRepository messageRepository;
 
     @InjectMocks

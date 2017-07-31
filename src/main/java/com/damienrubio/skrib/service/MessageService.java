@@ -18,9 +18,6 @@ public class MessageService {
     private PositionService positionService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private MessageRepository messageRepository;
 
     /**
